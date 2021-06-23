@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cookies</title>
+</head>
+<body>
+	<form name="myform" action="">
+		Enter name: <input type="text" name="customer" />
+		<input type="button" value="Set" onclick="WriteCookie()">
+		<input type="button" value="Read" onclick="ReadCookies()">
+
+		<a href="javascript:void(javascript:alert('hello world!!'))">
+			Click here to do nothing
+		</a>
+		<br><br><br><br>
+		<a href="javascript:alert('hello');">Click here for an alert</a>
+	</form>
+
+	<script type="text/javascript">
+		function WriteCookie() {
+			if (document.myform.customer.value === "") {
+				alert('Enter some value!');
+				return;
+			}
+
+			var cookieValue = escape(document.myform.customer.value) + ";";
+			document.cookie = "name = " + cookieValue;
+			document.cookie = "expires = " + new Date().toUTCString() + ";";
+			document.write("Setting Cookies: " + "name = " + cookieValue);
+		}
+
+		function ReadCookies() {
+			var allCookies = document.cookie;
+
+			document.write('All Cookies: ' + allCookies);
+
+			if (allCookies.length === 0){
+				alert('No cookie is stored.');
+			}
+
+			var cookieArray = allCookies.split(';');
+			for (var i of cookieArray){
+				var name = cookieArray[i].split('=')[0];
+				var value = cookieArray[i].split('=')[1];
+
+				document.write('Key is: ' + name + " and Value is: " + value);
+			}
+		}
+
+	</script>
+</body>
+</html>
